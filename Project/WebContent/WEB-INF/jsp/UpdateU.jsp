@@ -25,7 +25,8 @@
 				<div class="col-sm-4">
 				</div>
     			<div class="col-sm-4">
-					<form action="UpdateU_Servlet">
+					<form action="UpdateU_Servlet" method="post">
+						<input type="hidden" name="id" value="${detail.id}">
 
   							<div class="form-group">
    								<label for="exampleDropdownFormEmail2">ログインID</label>
@@ -44,16 +45,16 @@
 
  							<div class="form-group">
    								<label for="exampleDropdownFormPassword2">ユーザー名</label>
-   				 				<input name=name class="form-control input-sm" type="text" class="form-control">
+   				 				<input name=name class="form-control input-sm" type="text" value="${detail.name}" class="form-control">
  							</div>
 
  							<div class="form-group">
    								<label for="exampleDropdownFormPassword2">生年月日</label>
-   				 				<input name=birth class="form-control input-sm" type="text" class="form-control">
+   				 				<input name=birth class="form-control input-sm" type="date" value="${detail.birthDate}" class="form-control">
  							</div>
 
 							<div class="form-group">
- 								<button type="submit" class="btn btn-primary" value="${detail.id}">更新</button>
+ 								<button type="submit" class="btn btn-primary">更新</button>
  							</div>
  							<div class="form-group">
  					<button type="button" class="btn btn-secondary" onclick="history.back()">戻る</button>

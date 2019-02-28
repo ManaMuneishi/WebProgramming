@@ -29,8 +29,8 @@
    			 </div>
 
    			 <div class="col-sm-4">
-				<form>
-					<input type="hidden" name="login_id" value="${detail.Id}">
+				<form action= "DeleteU_S" method="post">
+					<input type="hidden" name="id" value="${detail.id}">
   						<div class="form-group">
    							<label for="exampleDropdownFormEmail2">ログインID:</label>
 								${detail.loginId}
@@ -47,7 +47,6 @@
 									<div class="col-sm-5">
 										<button type="submit" class="btn btn-danger btn-block">OK</button>
 									</div>
-
 								</div>
 							</div>
 						</div>

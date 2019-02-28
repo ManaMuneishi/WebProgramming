@@ -59,7 +59,7 @@ public class SearchU_Dao {
 		try {
 			conn = DB_Manager.getConnection();//データベースに繋ぐ
 
-			String sql = "SELECT * FROM user WHERE name LIKE '% ? %' = ?";
+			String sql = "SELECT * FROM user WHERE name LIKE % ? % = ?";
 
 			PreparedStatement pStmt = conn.prepareStatement(sql);//ステートメント
 			pStmt.setString(1, Name);
@@ -102,7 +102,7 @@ public class SearchU_Dao {
 		try {
 			conn = DB_Manager.getConnection();//データベースに繋ぐ
 
-			String sql = "SELECT * FROM user WHERE birth_date < '?' AND birth_date > '?'";
+			String sql = "SELECT * FROM user WHERE birth_date < ? AND birth_date > ?";
 
 			PreparedStatement pStmt = conn.prepareStatement(sql);//ステートメント
 			pStmt.setString(1, birth1);

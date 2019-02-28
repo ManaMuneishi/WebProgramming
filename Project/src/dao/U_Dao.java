@@ -98,6 +98,66 @@ public class U_Dao { //SQLについて書いてある
 			}
 		return userList;
 	}
+
+	public List<U_Beans> findSearch(String loginIdP, String nameP, String birth_dateP1, String birth_dateP2){
+		Connection conn = null;
+		ArrayList<U_Beans> userList = new ArrayList<U_Beans>();
+
+		try {
+			conn = DB_Manager.getConnection();
+
+			String sql = "SELECT * FROM user WHERE id NOT IN(1)";//idが1の人は除外して表示。
+
+			if(!loginIdP.equals("")) {
+				sql += " AND login_id = '" + loginIdP + "'"; //preではないのでシングルクオーテーションいる
+			}
+
+			if(!nameP.equals("")) {
+				sql += " AND name = '" + loginIdP + "'";
+			}
+
+			if(!birth_dateP1.equals("")|| !birth_dateP2.equals("") {
+				sql += " AND birthDate = '" + loginIdP + "'";
+			}
+
+			if() {
+				sql += " AND birthDate = '" + loginIdP + "'";
+			}
+			System.out.println(sql);
+
+			Statement stmt = conn.createStatement();//いるやつ。
+			ResultSet rs = stmt.executeQuery(sql);//いるやつ。
+
+			while(rs.next()) {
+				int id = rs.getInt("id");
+				String loginId = rs.getString("login_id");//loginIdとは、login_idカラムの値を文字列として取り出したものですの意味
+				String name = rs.getString("name");
+				Date birthDate = rs.getDate("birth_date");
+				String password = rs.getString("password");
+				String createDate = rs.getString("create_date");
+				String updateDate = rs.getString("update_date");
+				U_Beans user = new U_Beans(id, loginId, name, birthDate, password, createDate,updateDate);
+				userList.add(user);//userの内容をaddしてないと動かない。
+			}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return null;
+			} finally {
+				if (conn !=null) {
+					try {
+					conn.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+						return null;
+					}
+				}
+			}
+		return userList; //ここ大事！！
+	}
+
+
+
 	public void insertInfo(String login_id, String password,String name, String birth_date,String create_date,String update_date){//ここ消さないと、ログインできない。
 
 		Connection conn = null;
@@ -155,7 +215,7 @@ public class U_Dao { //SQLについて書いてある
 			if (!rs.next()) { //SELECTを書くときにはnextがいる。これで行数を取り込むかんじ。
 				return null; //次がなければnullを返す
 			}
-			int Id = rs.getInt(id);
+			int Id = rs.getInt("id");
 			String loginId = rs.getString("login_id");//loginIdとは、login_idカラムの値を文字列として取り出したものですの意味
 			String name = rs.getString("name");
 			Date birthDate = rs.getDate("birth_date");
@@ -180,16 +240,17 @@ public class U_Dao { //SQLについて書いてある
 			}
 
 
-	public void deleteUser(int id) {
-				Connection conn = null;
+	public void deleteUser(String id) {
+
+		Connection conn = null;
 
     	 try {
     		conn = DB_Manager.getConnection();//データベースに繋ぐ
 
-   		String sql = "DELETE FROM user WHERE id = ?";
+    		String sql = "DELETE FROM user WHERE id = ?";
 
 			PreparedStatement pStmt = conn.prepareStatement(sql);//ステートメント
-			pStmt.setInt(1, id);
+			pStmt.setString(1, id);
 			pStmt.executeUpdate();//これで実行
 
 			pStmt.close();//ステートメントクローズ。
@@ -208,5 +269,79 @@ public class U_Dao { //SQLについて書いてある
 			}
     	 	return;
 	}
-}
 
+	public void updateUser1(String id,String name, String password, String birth_date, String update_date) {//passも変える場合
+
+		Connection conn = null;
+
+   	 try {
+   		conn = DB_Manager.getConnection();//データベースに繋ぐ
+
+  		String sql = "UPDATE user SET name = ?, password = ? , birth_date = ?, update_date = now() WHERE id = ?";
+
+			PreparedStatement pStmt = conn.prepareStatement(sql);//ステートメント
+
+			String source = password;
+			Charset charset = StandardCharsets.UTF_8;//日本語にするやつ
+			String algorithm = "MD5";//ハッシュアルゴリズム
+			byte[] bytes = MessageDigest.getInstance(algorithm).digest(source.getBytes(charset));//ハッシュ生成処理(全部大文字になるやつ)
+			String Password = DatatypeConverter.printHexBinary(bytes);//ハッシュ化したやつをPasswordに代入
+
+			pStmt.setString(1, name);
+			pStmt.setString(2, Password);
+			pStmt.setString(3, birth_date);
+			pStmt.setString(4, id);
+
+			pStmt.executeUpdate();//これで実行
+
+			pStmt.close();//ステートメントクローズ。
+
+  	    } catch (SQLException | NoSuchAlgorithmException e) {
+  	      e.printStackTrace();
+			} finally {
+				if (conn !=null) {
+					try {
+					conn.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+
+					}
+				}
+			}
+   	 	return;
+	}
+
+	public void updateUser2(String id, String name, String birth_date, String update_date){//passをかえない場合
+		Connection conn = null;
+
+	   	 try {
+	   		conn = DB_Manager.getConnection();//データベースに繋ぐ
+
+	  		String sql = "UPDATE user SET name = ?, birth_date =?, update_date = now() WHERE id = ?";
+
+				PreparedStatement pStmt = conn.prepareStatement(sql);//ステートメント
+
+
+				pStmt.setString(1, "name");
+				pStmt.setString(2, "birth_date");
+				pStmt.setString(3, "id");
+
+				pStmt.executeUpdate();//これで実行
+				pStmt.close();//ステートメントクローズ。
+
+	  	    } catch (SQLException e) {
+	  	      e.printStackTrace();
+				} finally {
+					if (conn !=null) {
+						try {
+						conn.close();
+						} catch (SQLException e) {
+							e.printStackTrace();
+
+						}
+					}
+				}
+	   	 	return;
+	}
+
+}

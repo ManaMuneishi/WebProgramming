@@ -28,7 +28,8 @@
 			<a href="NewU_Servlet">新規登録</a>
 
 		</div>
-		<form action="ListU_Servlet">
+		<form action="ListU_Servlet" method="post">
+
 				<div class="row">
     				<div class="col-sm-4"></div>
   					<div class="col-sm-4">
@@ -43,11 +44,11 @@
  						</div>
  						<div class="form-group">
    							<label for="exampleDropdownFormEmail2">生年月日</label>
-   							<input name= "birth1" class="form-control input-sm" type="text" class="form-control" id="exampleDropdownFormEmail2" placeholder="年/月/日">
+   							<input name= "birth1" class="form-control input-sm" type="date" class="form-control" id="exampleDropdownFormEmail2" placeholder="年/月/日">
  						</div>
  						 <div class="form-group">
    							 <label for="exampleDropdownFormPassword2">〜</label>
-   				 			<input name= "birth2" class="form-control input-sm" type="text" class="form-control" id="exampleDropdownFormPassword2" placeholder="年/月/日">
+   				 			<input name= "birth2" class="form-control input-sm" type="date" class="form-control" id="exampleDropdownFormPassword2" placeholder="年/月/日">
  				 		</div>
  					</div>
  				</div>
@@ -61,7 +62,7 @@
  					<div class="col-sm-4">
  					</div>
  					<div class="col-sm-4">
- 						<button type="submit" class="btn btn-primary btn-lg btn-block">検索</button>
+ 						<button type="submit" class="btn btn-primary btn-lg btn-block" onclick="location.href='ListU_Servlet?${userInfo}'">検索</button>
  					</div>
  				</div>
  			</div>
@@ -90,7 +91,7 @@
                      <!-- TODO 未実装；ログインボタンの表示制御を行う -->
 				      <td>
 				     		 <a class="btn btn-primary" href="DetailU_S?id=${U_Beans.id}">詳細</a>
-				     		 <a class="btn btn-success" href="UpdateU_Servlet?id=${detail.id}">更新</a>
+				     		 <a class="btn btn-success" href="UpdateU_Servlet?id=${U_Beans.id}">更新</a>
 				     		 <a class="btn btn-danger" href="DeleteU_S?id=${U_Beans.id}">削除</a>
 				      </td>
 			    </tr>

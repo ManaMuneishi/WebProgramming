@@ -30,11 +30,11 @@ public class DetailU_Servlet extends HttpServlet {
 				request.setCharacterEncoding("UTF-8");
 
 				try {
-					String Id = request.getParameter("id"); // idを取得
-					int id = Integer.parseInt(Id);//idをintに直す
+					String id = request.getParameter("Id"); // idを取得
+					int Id = Integer.parseInt(id);//idをintに直す
 
 					U_Dao userDao = new U_Dao();
-					U_Beans de = userDao.findDetail(id);
+					U_Beans de = userDao.findDetail(Id);
 
 					request.setAttribute("detail", de);
 					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/DetailU.jsp");

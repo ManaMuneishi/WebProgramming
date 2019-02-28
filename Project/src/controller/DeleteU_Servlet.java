@@ -49,10 +49,9 @@ public class DeleteU_Servlet extends HttpServlet {
 
 		try {
 			String Id = request.getParameter("id"); // idを取得
-			int id = Integer.parseInt(Id);//idをintに直す
 
 			U_Dao userDao = new U_Dao();
-			userDao.deleteUser(id);
+			userDao.deleteUser(Id);
 
 			response.sendRedirect("ListU_Servlet");
 

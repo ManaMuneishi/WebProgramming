@@ -59,6 +59,7 @@
  				</div>
 
     			<div class="col-sm-4"></div>
+    			</div>
 			</form>
 
 		 <div class="text-left">

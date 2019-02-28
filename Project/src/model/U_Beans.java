@@ -26,6 +26,7 @@ public class U_Beans {
 	}
 
 	public U_Beans(int id, String loginId, String name, Date birthDate, String createDate, String updateDate) {
+		this.id = id;
 		this.loginId = loginId;
 		this.name = name;
 		this.birthDate = birthDate;

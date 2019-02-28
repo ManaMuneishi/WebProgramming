@@ -23,7 +23,7 @@ public class NewU_Servlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/NewU.jsp");//フォワード
-		dispatcher.forward(request, response);
+		dispatcher.forward(request, response); //ただフォワードするだけ
 
 		}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
