@@ -88,12 +88,21 @@
      				 <td>${U_Beans.loginId}</td>
                      <td>${U_Beans.name}</td>
                      <td>${U_Beans.birthDate}</td>
+
                      <!-- TODO 未実装；ログインボタンの表示制御を行う -->
+                     <c:if test="${U_Beans.id = 1}">
 				      <td>
 				     		 <a class="btn btn-primary" href="DetailU_S?id=${U_Beans.id}">詳細</a>
 				     		 <a class="btn btn-success" href="UpdateU_Servlet?id=${U_Beans.id}">更新</a>
 				     		 <a class="btn btn-danger" href="DeleteU_S?id=${U_Beans.id}">削除</a>
 				      </td>
+				      </c:if>
+				      <td>
+				     		 <a class="btn btn-primary" href="DetailU_S?id=${U_Beans.id}">詳細</a>
+				     		 <a class="btn btn-success" href="UpdateU_Servlet?id=${U_Beans.id}">更新</a>
+				     		 <a class="btn btn-danger" href="DeleteU_S?id=${U_Beans.id}">削除</a>
+				      </td>
+
 			    </tr>
 			    </c:forEach>
   			</tbody>

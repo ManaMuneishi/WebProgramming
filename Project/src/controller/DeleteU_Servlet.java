@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.U_Dao;
 import model.U_Beans;
@@ -26,6 +27,14 @@ public class DeleteU_Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
+
+		HttpSession session = request.getSession();
+		Object user = session.getAttribute("userInfo");//
+
+		if (user == null) {
+			response.sendRedirect("Login_Servlet");//ログインにリダイレクト
+			return;
+		}
 
 		try {
 			String Id = request.getParameter("id"); // idを取得

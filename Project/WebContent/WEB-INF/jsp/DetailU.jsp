@@ -6,21 +6,19 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css" integrity="sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA" crossorigin="anonymous">
-
 <link rel="stylesheet" href="css/style.css">
+
+
 <title>ユーザ情報詳細参照</title>
 </head>
 <body>
-	<nav class="nav">
   		<ul class="nav justify-content-end">
- 			 <li class="nav-item">
-   			<li class="nav-bar-text">${userInfo.name} さん</li>
-
-  			<li class="nav-item">
+   				<li class="nav-bar-text">${userInfo.name} さん</li>
+   			<li class="nav-item">
   				  <a class="nav-link" href="Logout_Servlet">ログアウト</a>
  			 </li>
 		</ul>
-	</nav>
+
 	<h1 class="userInfo">ユーザ情報詳細参照
 	</h1>
 	<div class="container">

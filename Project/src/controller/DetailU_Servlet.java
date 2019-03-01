@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.U_Dao;
 import model.U_Beans;
@@ -28,6 +29,13 @@ public class DetailU_Servlet extends HttpServlet {
 		// TODO  未実装：idを引数にして、idに紐づくユーザ情報を出力する
 		// TODO  未実装：ユーザ情報をリクエストスコープにセットしてjspにフォワード
 				request.setCharacterEncoding("UTF-8");
+
+				HttpSession session = request.getSession();
+				Object user = session.getAttribute("userInfo");//
+				if (user == null) {
+					response.sendRedirect("Login_Servlet");//セッションないときはログイン画面にリダイレクト
+					return;
+				}
 
 				try {
 					String Id = request.getParameter("id"); // idを取得
