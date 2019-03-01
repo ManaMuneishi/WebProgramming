@@ -33,7 +33,7 @@ public class DeleteU_Servlet extends HttpServlet {
 
 		if (user == null) {
 			response.sendRedirect("Login_Servlet");//ログインにリダイレクト
-			return;
+		return;
 		}
 
 		try {

@@ -20,6 +20,7 @@ public class U_Beans {
 		this.id = id;
 		this.loginId = loginId;
 		this.name = name;
+		this.birthDate = birthDate;
 		this.password = password;
 		this.createDate = createDate;
 		this.updateDate = updateDate;

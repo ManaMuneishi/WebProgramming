@@ -27,7 +27,7 @@ public class NewU_Servlet extends HttpServlet {
 		Object user = session.getAttribute("userInfo");//
 		if (user == null) {
 			response.sendRedirect("Login_Servlet");//セッションないときはログインにリダイレクト
-			return;
+		return;
 		}
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/NewU.jsp");//フォワード

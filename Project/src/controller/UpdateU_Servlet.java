@@ -26,7 +26,6 @@ public class UpdateU_Servlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		Object user = session.getAttribute("userInfo");//
-
 		if (user == null) {
 			response.sendRedirect("Login_Servlet");//セッションないときはログインにリダイレクト
 			return;
@@ -67,7 +66,7 @@ public class UpdateU_Servlet extends HttpServlet {
 
 				//デフォルトのパスは放っておく。いらない。
 
-				//両方埋まっている場合＝passが正しいときかつpassがnotnull＝ passを変えるとき =全部かえるとき！
+				//両方埋まっている場合 ＝ passが正しいときかつpassが!null ＝ passを変えるとき = 全部かえるとき！
 				if(!(pass1 .equals (null)) && pass1 .equals (pass2)) {// nullでイコールになるか
 
 					U_Dao userDao1 = new U_Dao();

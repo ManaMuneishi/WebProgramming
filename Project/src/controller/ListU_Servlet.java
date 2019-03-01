@@ -32,7 +32,6 @@ public class ListU_Servlet extends HttpServlet {
 
 				HttpSession session = request.getSession();//セッションスコープ
 				Object user = session.getAttribute("userInfo");//
-
 				if (user == null) {  //セッションがないとき= null
 					response.sendRedirect("Login_Servlet");//ログインにリダイレクト
 				return;//メソッド内で別の遷移先があるときは、最初の遷移のとこに必ずreturnを書こう。

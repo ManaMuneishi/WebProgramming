@@ -34,7 +34,7 @@ public class DetailU_Servlet extends HttpServlet {
 				Object user = session.getAttribute("userInfo");//
 				if (user == null) {
 					response.sendRedirect("Login_Servlet");//セッションないときはログイン画面にリダイレクト
-					return;
+				return;
 				}
 
 				try {
