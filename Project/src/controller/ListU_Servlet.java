@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.SearchU_Dao;
 import dao.U_Dao;
 import model.U_Beans;
 
@@ -53,49 +52,19 @@ public class ListU_Servlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		try {
-		String Login_id = request.getParameter("login_id");
-		String Name = request.getParameter("name");
+			String Login_id = request.getParameter("login_id");
+			String Name = request.getParameter("name");
+			String Birth1 = request.getParameter("birth1");
+			String Birth2 = request.getParameter("birth2");
 
-		String birth1 = request.getParameter("birth1");
+			U_Dao Dao = new U_Dao();
+			List<U_Beans> userList = Dao.findSearch(Login_id, Name, Birth1, Birth2); //処理
 
-	    String birth2 = request.getParameter("birth2");
-
-		if(!(Login_id .equals (null))) {//loginidのみで検索
-
-			SearchU_Dao suDao1 = new SearchU_Dao();
-			List<U_Beans> result1 = suDao1.searchByLoginId(Login_id); //処理
-
-			request.setAttribute("Result", result1);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/SearchListU.jsp");
-			dispatcher.forward(request, response);
-			return;
-
-		}else if(!(Name .equals (null))) {//nameのみで検索
-
-			SearchU_Dao suDao2 = new SearchU_Dao();
-			List<U_Beans> result2 = suDao2.searchByLoginId(Login_id); //処理
-
-			request.setAttribute("Result", result2);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/SearchListU.jsp");
-			dispatcher.forward(request, response);
-			return;
-
-		}else if( !(birth1 .equals(null)) && (birth1 .before(birth2)) ) {//生年月日のみで検索
-
-			SearchU_Dao suDao3 = new SearchU_Dao();
-			List<U_Beans> result3 = suDao3.searchByLoginId(Login_id); //処理
-
-			request.setAttribute("Result", result3);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/SearchListU.jsp");
-			dispatcher.forward(request, response);
-			return;
-
-		}else {//その他全部
-			request.setAttribute("errResult", "入力された内容では検索できません");
+			request.setAttribute("userList", userList);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ListU.jsp");
 			dispatcher.forward(request, response);
 			return;
-		}
+
 		} catch (Exception e) {
 		e.printStackTrace();
 		}

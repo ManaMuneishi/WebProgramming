@@ -108,20 +108,23 @@ public class U_Dao { //SQLについて書いてある
 
 			String sql = "SELECT * FROM user WHERE id NOT IN(1)";//idが1の人は除外して表示。
 
+			//各コマをそれぞれifで定義 = 一つ一つが独立した定義 = 2つ以上が同時に起こりうる。ので4つの場合の定義だけ書けばいい。
+
+			//loginIdPではないものが(少なくとも一つ以上)nullのとき = loginPが入力されている時 =(loginのみアリとは限らない）以下4つ同じ
 			if(!loginIdP.equals("")) {
-				sql += " AND login_id = '" + loginIdP + "'"; //preではないのでシングルクオーテーションいる
+				sql += " AND login_id = '" + loginIdP + "'"; //preではないのでシングルクオーテーションいる."〜"内を上記sqlにくっつける、の式。
 			}
 
 			if(!nameP.equals("")) {
-				sql += " AND name = '" + loginIdP + "'";
+				sql += " AND name LIKE '%" + nameP + "%'";  //『and= ' 』とnamePと『 ' 』。部分検索は『%文字%』の前後に' いる。
 			}
 
-			if(!birth_dateP1.equals("")|| !birth_dateP2.equals("") {
-				sql += " AND birthDate = '" + loginIdP + "'";
+			if(!birth_dateP1.equals("")) {
+				sql += " AND birth_date > '" + birth_dateP1 + "'";
 			}
 
-			if() {
-				sql += " AND birthDate = '" + loginIdP + "'";
+			if(!birth_dateP2.equals("")) {
+				sql += " AND birthDate < '" + birth_dateP2 + "'"; //諸々スペース開ける(ANDの前、＜の後ろ）
 			}
 			System.out.println(sql);
 
@@ -153,9 +156,8 @@ public class U_Dao { //SQLについて書いてある
 					}
 				}
 			}
-		return userList; //ここ大事！！
+		return userList; //ここ大事！！findAllの戻り値と同じ名前にする。
 	}
-
 
 
 	public void insertInfo(String login_id, String password,String name, String birth_date,String create_date,String update_date){//ここ消さないと、ログインできない。
